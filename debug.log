@@ -1,0 +1,2 @@
+[1226/163156.973:ERROR:process_reader_win.cc(123)] NtOpenThread: {アクセス拒否} プロセスはオブジェクトのアクセスを要求しましたが、アクセス権が与えられていません。 (0xc0000022)
+[1226/163156.987:ERROR:exception_snapshot_win.cc(88)] thread ID 19100 not found in process
