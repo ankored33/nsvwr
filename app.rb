@@ -10,7 +10,7 @@ def firstpage(togetterUrl)
     p "ready"
 
     driver.navigate.to togetterUrl # URLを開く
-    sleep 5
+    sleep 10
 
     tweets = []
     puts driver.title
@@ -62,11 +62,12 @@ def andMore(togetterUrl, maxPage)
         # htmlをパース(解析)してオブジェクトを生成
         arr = []
         doc = Nokogiri::HTML.parse( html, nil, charset)
-        CSV.open("test.csv", "w", :encoding => "SJIS") do |list|
+        CSV.open("test.csv", "a", :encoding => "SJIS") do |list|
             doc.css(".list_tweet_box").each do |item|
-                user = item.css(".user_link").inner_text
+                user = item.css(".user_link").inner_text.gsub(/\r\n|\r|\n|\s|\t/, "").strip
                 body = item.css(".tweet").inner_text
-                status = item.css(".status_right").inner_text
+                status = item.css(".status_right").inner_text.strip.gsub("-","/")
+                #p status = status.to_s.insert(9, " ").gsub("-","/")
                 if user.include?("@NJSLYR" || "@dhtls" || "@the_v_njslyr")
                     njslyr = "njslyr"
                 else
